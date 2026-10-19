@@ -1,16 +1,74 @@
+:root {
+  --scale: 1;
+  --pink: #ea80b0;
+  --pink-deep: #ff4d8d;
+}
+
 body {
   margin: 0;
   height: 100vh;
   overflow: hidden;
-  background: #000;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: radial-gradient(ellipse at center, #2a0a1c 0%, #000 70%);
+  font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #fff;
+}
+
+/* ---------- Tiêu đề ---------- */
+.title {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  padding: 0 16px;
+  text-align: center;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.started .title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title h1 {
+  margin: 0;
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  color: var(--pink);
+  text-shadow: 0 0 12px var(--pink-deep), 0 0 30px rgba(255, 77, 141, 0.6);
+  animation: glow 2.5s infinite alternate ease-in-out;
+}
+
+.title p {
+  margin: 6px 0 0;
+  font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+  font-weight: 300;
+  color: #ffd6e7;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 8px var(--pink-deep), 0 0 20px rgba(255, 77, 141, 0.4); }
+  to   { text-shadow: 0 0 16px var(--pink-deep), 0 0 40px rgba(255, 77, 141, 0.8); }
+}
+
+/* ---------- Trái tim chữ (giữ như cũ) ---------- */
+#stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 450px;
+  height: 450px;
+  margin: -195px 0 0 -225px;
+  transform: scale(var(--scale));
+  transform-origin: center;
 }
 
 #ui .love {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -225px 0 0 -225px;
+  top: 0;
+  left: 0;
   --i: 1;
 }
 
@@ -127,4 +185,240 @@ body {
   100% {
     transform: translateY(180px);
   }
+}
+
+/* ---------- Nút ---------- */
+.btn {
+  font-family: inherit;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(135deg, #ff4d8d, #ea80b0);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 28px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 77, 141, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 30px rgba(255, 77, 141, 0.9);
+}
+
+.btn_letter {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease 1.5s;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.btn_letter:hover {
+  transform: translateX(-50%) scale(1.06);
+}
+
+.started .btn_letter {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@keyframes bounce {
+  0%, 100% { margin-bottom: 0; }
+  50%      { margin-bottom: 8px; }
+}
+
+/* ---------- Màn hình mở đầu ---------- */
+#intro {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  z-index: 10;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+#intro.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.intro_box {
+  text-align: center;
+  padding: 0 16px;
+  max-width: 520px;
+}
+
+.intro_gift {
+  font-size: 4.5rem;
+  animation: shake 1.6s infinite ease-in-out;
+}
+
+.intro_to {
+  font-family: "Dancing Script", cursive;
+  font-size: 2rem;
+  color: var(--pink);
+  margin: 10px 0 24px;
+}
+
+.hidden_step {
+  display: none;
+}
+
+.intro_gift.pop {
+  animation: pop 0.5s ease, shake 1.6s 0.5s infinite ease-in-out;
+}
+
+@keyframes pop {
+  0%   { transform: scale(0.2) rotate(-20deg); opacity: 0; }
+  70%  { transform: scale(1.25) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.ask_hint {
+  min-height: 1.5em;
+  margin: 0 0 24px;
+  color: #ffd6e7;
+}
+
+.ask_buttons {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+#yesBtn {
+  transition: transform 0.3s ease;
+}
+
+.btn_no {
+  background: #555;
+  box-shadow: none;
+}
+
+.btn_no.running {
+  position: fixed;
+  z-index: 11;
+  transition: left 0.25s ease, top 0.25s ease;
+}
+
+.burst {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  font-size: 24px;
+  z-index: 12;
+  pointer-events: none;
+  animation: burst 1.6s ease-out forwards;
+}
+
+@keyframes burst {
+  0%   { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.4); opacity: 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0) scale(1); }
+  25%      { transform: rotate(-8deg) scale(1.05); }
+  75%      { transform: rotate(8deg) scale(1.05); }
+}
+
+/* ---------- Tim và hoa rơi ---------- */
+#falling {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  top: -40px;
+  color: var(--pink);
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  50%  { transform: translate(30px, 55vh) rotate(180deg); }
+  100% { transform: translate(-20px, 110vh) rotate(360deg); }
+}
+
+/* ---------- Lá thư ---------- */
+#letter {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 5;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+#letter.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.letter_paper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 32px 28px;
+  background: linear-gradient(180deg, #fff5f9, #ffe3ef);
+  color: #5a2340;
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(255, 77, 141, 0.6);
+  transform: scale(1);
+  transition: transform 0.4s ease;
+}
+
+#letter.hidden .letter_paper {
+  transform: scale(0.85);
+}
+
+.letter_paper h2 {
+  margin: 0 0 16px;
+  font-family: "Dancing Script", cursive;
+  font-size: 2rem;
+  color: #d63a7a;
+}
+
+#letterText {
+  white-space: pre-line;
+  line-height: 1.7;
+  font-size: 1rem;
+  min-height: 12em;
+}
+
+.letter_sign {
+  margin: 20px 0 0;
+  text-align: right;
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5rem;
+  color: #d63a7a;
+}
+
+.letter_close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: none;
+  background: none;
+  font-size: 1.8rem;
+  color: #d63a7a;
+  cursor: pointer;
 }

@@ -1,15 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I Love You Heart Animation</title>
+  <title>Chúc mừng 20/10 - Gửi Pidangyeu</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div id="ui"></div>
+  <!-- Màn hình mở đầu -->
+  <div id="intro">
+    <!-- Bóc quà nhiều lớp -->
+    <div id="giftStep" class="intro_box">
+      <div id="giftIcon" class="intro_gift">🎁</div>
+      <p id="giftText" class="intro_to">Gửi Pidangyeu của anh</p>
+      <button id="openBtn" class="btn">Chạm để mở quà 💝</button>
+    </div>
+
+    <!-- Câu hỏi với nút "Không" chạy trốn -->
+    <div id="askStep" class="intro_box hidden_step">
+      <div class="intro_gift">🥺</div>
+      <p class="intro_to">Pidangyeu có yêu anh không?</p>
+      <p id="askHint" class="ask_hint">&nbsp;</p>
+      <div class="ask_buttons">
+        <button id="yesBtn" class="btn">Có 💖</button>
+        <button id="noBtn" class="btn btn_no">Không</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hiệu ứng tim và hoa rơi -->
+  <div id="falling"></div>
+
+  <header class="title">
+    <h1>Chúc mừng ngày 20/10</h1>
+    <p>Gửi Phụng – Pidangyeu xinh đẹp nhất của anh 🌸</p>
+  </header>
+
+  <!-- Trái tim chữ (giữ như cũ) -->
+  <div id="stage">
+    <div id="ui"></div>
+  </div>
+
+  <button id="letterBtn" class="btn btn_letter">Mở thư 💌</button>
+
+  <!-- Lá thư -->
+  <div id="letter" class="hidden">
+    <div class="letter_paper">
+      <button id="closeBtn" class="letter_close" aria-label="Đóng">×</button>
+      <h2>Gửi Phụng yêu dấu,</h2>
+      <div id="letterText"></div>
+      <p class="letter_sign">Yêu em – Pidangyeu của anh ❤</p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
